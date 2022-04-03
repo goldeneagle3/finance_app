@@ -1,1 +1,1 @@
-export type TJwt = { token: string } | null;
+export type TJwt = { auth_token: string } | null;

@@ -20,7 +20,7 @@ class AuthManager {
 
     await Password.comparePassword(user.password, password);
 
-    const payload = { id: user.id, username: user.username };
+    const payload = { id: user.id, username: user.username, email: user.email };
 
     const token = JWTUtils.sign(payload, env.TOKEN, {
       expiresIn: "1h",

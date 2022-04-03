@@ -10,8 +10,14 @@ const login = async (user: ILoginUser): Promise<any> => {
   if (response.data) {
     localStorage.setItem('jwt', JSON.stringify(response.data));
 
-    const decodedJwt: IDecodedJwt = jwt_decode(response.data.token);
-    localStorage.setItem('user', JSON.stringify(decodedJwt.user));
+    const decodedJwt: IDecodedJwt = jwt_decode(response.data.auth_token);
+    localStorage.setItem('user', JSON.stringify(decodedJwt));
   }
   return response.data;
 };
+
+const authService = {
+  login,
+};
+
+export default authService;
