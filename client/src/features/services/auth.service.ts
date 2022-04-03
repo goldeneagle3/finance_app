@@ -11,7 +11,7 @@ const login = async (user: ILoginUser): Promise<any> => {
     localStorage.setItem('jwt', JSON.stringify(response.data));
 
     const decodedJwt: IDecodedJwt = jwt_decode(response.data.auth_token);
-    localStorage.setItem('user', JSON.stringify(decodedJwt.user));
+    localStorage.setItem('user', JSON.stringify(decodedJwt));
   }
   return response.data;
 };

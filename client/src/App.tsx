@@ -5,6 +5,8 @@ import { ThemeProvider } from '@mui/material';
 import { theme } from './theme';
 import NewUser from './user/NewUser';
 import Home from './core/Home';
+import Signin from './auth/Signin';
+// import PrivateRoute from './auth/PrivateRoute';
 
 const App = () => {
   return (
@@ -13,6 +15,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<NewUser />} />
+          <Route path="/signin" element={<Signin />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

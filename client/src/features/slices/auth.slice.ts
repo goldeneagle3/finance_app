@@ -27,13 +27,13 @@ const initialState: IAuthState = {
   isError: false,
 };
 
-export const login = createAsyncThunk(
-  'auth/login',
+export const signin = createAsyncThunk(
+  'auth/signin',
   async (user: ILoginUser, thunkAPI) => {
     try {
       return await authService.login(user);
     } catch (error) {
-      return thunkAPI.rejectWithValue('Unable to login');
+      return thunkAPI.rejectWithValue('Unable to signin!');
     }
   },
 );
@@ -50,17 +50,17 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // LOGIN
-      .addCase(login.pending, (state) => {
+      // Signin
+      .addCase(signin.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(login.fulfilled, (state, action) => {
+      .addCase(signin.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.jwt = action.payload;
         state.isAuthenticated = true;
       })
-      .addCase(login.rejected, (state) => {
+      .addCase(signin.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
         state.user = null;
