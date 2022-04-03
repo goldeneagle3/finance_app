@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
 import { TJwt } from '../../types/jwt.type';
+import { ILoginUser } from '../interfaces/auth.interface';
 import { IAsyncState } from '../interfaces/state.interface';
-import { IDisplayUser, INewUser } from '../interfaces/user.interface';
-import userService from '../services/user.service';
+import { IDisplayUser } from '../interfaces/user.interface';
+import authService from '../services/auth.service';
 
 const storedUser: string | null = localStorage.getItem('user');
 const user: IDisplayUser | null = !!storedUser ? JSON.parse(storedUser) : null;
@@ -26,19 +27,19 @@ const initialState: IAuthState = {
   isError: false,
 };
 
-export const register = createAsyncThunk(
-  'users/create',
-  async (user: INewUser, thunkAPI) => {
+export const login = createAsyncThunk(
+  'auth/login',
+  async (user: ILoginUser, thunkAPI) => {
     try {
-      return await userService.createUser(user);
+      return await authService.login(user);
     } catch (error) {
-      return thunkAPI.rejectWithValue('Unable to register!');
+      return thunkAPI.rejectWithValue('Unable to login');
     }
   },
 );
 
-export const userSlice = createSlice({
-  name: 'user',
+export const authSlice = createSlice({
+  name: 'auth',
   initialState,
   reducers: {
     reset: (state) => {
@@ -49,27 +50,29 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // Create
-      .addCase(register.pending, (state) => {
+      // LOGIN
+      .addCase(login.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(register.fulfilled, (state, action) => {
+      .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = action.payload;
+        state.jwt = action.payload;
+        state.isAuthenticated = true;
       })
-      .addCase(register.rejected, (state) => {
+      .addCase(login.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
         state.user = null;
+        state.isAuthenticated = false;
       });
   },
 });
 
-export const { reset } = userSlice.actions;
+export const { reset } = authSlice.actions;
 
 export const selectedUser = (state: RootState) => {
-  return state.user;
+  return state.auth;
 };
 
-export default userSlice.reducer;
+export default authSlice.reducer;
