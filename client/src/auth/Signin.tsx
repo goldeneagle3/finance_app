@@ -57,7 +57,7 @@ const Signin = () => {
   const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (emailHasError || passwordHasError) return;
+    if (emailHasError || passwordHasError) return false;
 
     if (email.length === 0 || password.length === 0) return;
 

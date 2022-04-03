@@ -1,5 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import auth from '../auth/auth-helper';
 import { useAppSelector } from '../hooks/redux.hook';
 
 const Home = () => {
@@ -7,15 +9,13 @@ const Home = () => {
 
   const { jwt } = useAppSelector((state) => state.auth);
 
-  useEffect(() => {
-    if (!jwt?.auth_token) return navigate('/register');
-  }, [jwt]);
+  let user = auth.isAuthenticated();
 
   return (
     <div>
       <button onClick={() => navigate('/register')}>Register</button>
       <button onClick={() => navigate('/signin')}>Login</button>
-      <p>{jwt?.auth_token} </p>
+      <p>{user?.username} </p>
     </div>
   );
 };
