@@ -20,15 +20,10 @@ export class ExpenseController {
 
   async listByUser(req: Request, res: Response) {
     try {
-      // TEST DATA
-      // let date = new Date();
-      // let yes = date.setDate(date.getDate() - 1);
-      // let tom = date.setDate(date.getDate() + 1);
-      let data = {
-        firstDay: req.body.firstDay,
-        lastDay: req.body.lastDay,
-      };
-      const datas = await expenseManager.listByUser(data, res.locals.auth.id);
+      const datas = await expenseManager.listByUser(
+        req.query,
+        res.locals.auth.id
+      );
       return res.status(200).json(datas);
     } catch (error) {
       logger.error(error);
@@ -119,7 +114,7 @@ export class ExpenseController {
     try {
       const result = await expenseManager.update(
         { ...req.body, updated: Date.now() },
-        res.locals.user.id
+        res.locals.expense.id
       );
       return res.status(200).json(result);
     } catch (error) {
@@ -131,7 +126,7 @@ export class ExpenseController {
 
   async remove(_, res: Response) {
     try {
-      const result = await expenseManager.remove(res.locals.user.id);
+      const result = await expenseManager.remove(res.locals.expense.id);
       return res.status(200).json({ message: result });
     } catch (error) {
       logger.error(error);

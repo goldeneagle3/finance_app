@@ -16,7 +16,7 @@ export class ExpenseRoute {
     logger.info("[ExpenseRoute] Creating expenses route.");
 
     this.router.param("userId", Params.userByID);
-    this.router.param("expenseId", Params.userByID);
+    this.router.param("expenseId", Params.expenseByID);
 
     this.router.post("/", this.create);
     this.router.get("/", this.listByUser);
@@ -25,7 +25,6 @@ export class ExpenseRoute {
     this.router.get("/plot", this.plotExpenses);
     this.router.get("/category/averages", this.averageCategories);
     this.router.get("/yearly", this.yearlyExpenses);
-    // this.router.get("/:expenseId", requireSignin, this.read);
     this.router.patch(
       "/:expenseId",
       requireSignin,

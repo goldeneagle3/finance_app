@@ -13,17 +13,13 @@ const _validateLength: TValidatorFn = (
   return true;
 };
 
-export const validateNameLength: TValidatorFn = (
-  text: string,
-): boolean => {
+export const validateNameLength: TValidatorFn = (text: string): boolean => {
   if (typeof text !== 'string') return false;
 
   return _validateLength(text, { min: 3 });
 };
 
-export const validatePasswordLength: TValidatorFn = (
-  text: string,
-): boolean => {
+export const validatePasswordLength: TValidatorFn = (text: string): boolean => {
   if (typeof text !== 'string') return false;
 
   return _validateLength(text, { min: 6, max: 20 });

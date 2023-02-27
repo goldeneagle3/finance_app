@@ -169,8 +169,7 @@ export class ExpenseDao extends DaoBaseRepository {
       { $group: { _id: "$_id.category", avgSpent: { $avg: "$totalSpent" } } },
       { $project: { x: "$_id", y: "$avgSpent" } },
     ]).exec();
-
-    return categoryMonthlyAvg;
+    return { monthAVG: categoryMonthlyAvg };
   }
 
   async yearlyExpenses(data: Days, param) {
@@ -190,6 +189,6 @@ export class ExpenseDao extends DaoBaseRepository {
       { $project: { x: "$_id", y: "$totalSpent" } },
     ]).exec();
 
-    return totalMonthly;
+    return { monthTot: totalMonthly };
   }
 }

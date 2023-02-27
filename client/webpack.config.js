@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
+  devtool: 'eval-source-map',
   entry: path.resolve(__dirname, 'src', 'index.tsx'),
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -51,15 +52,15 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, './src/index.html'),
+      template: path.resolve(__dirname, './public/index.html'),
     }),
     new CleanWebpackPlugin(),
   ],
   devServer: {
-    static: path.join(__dirname, './src'),
+    static: path.join(__dirname, './public'),
     historyApiFallback: true,
     port: 3001,
-    hot: 'only',
+    hot: true,
     compress: true,
     open: true,
   },

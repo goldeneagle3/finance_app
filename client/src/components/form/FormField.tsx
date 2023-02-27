@@ -13,6 +13,7 @@ export default function FormField({
   helperText,
   type = 'text',
   placeholder,
+  multiline,
 }: IFormField) {
   return (
     <React.Fragment>
@@ -35,6 +36,8 @@ export default function FormField({
         size="small"
         placeholder={placeholder ? placeholder : ''}
         sx={{ borderColor: 'red' }}
+        multiline={multiline}
+        rows={5}
       />
     </React.Fragment>
   );

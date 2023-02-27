@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Navigate } from 'react-router-dom';
 import { useAppSelector } from '../hooks/redux.hook';
 import auth from './auth-helper';
 
 const PrivateRoute = ({ page }: { page: JSX.Element }) => {
-  const navigate = useNavigate();
+  const { jwt } = useAppSelector((state) => state.auth);
 
-  return auth.isAuthenticated() ? page : <Navigate replace to="/signin" />;;
+  const isAuth = auth.isAuthenticated() && jwt?.auth_token;
+  return isAuth ? page : <Navigate replace to="/signin" />;
 };
 
 export default PrivateRoute;

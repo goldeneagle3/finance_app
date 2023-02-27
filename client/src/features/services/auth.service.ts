@@ -4,7 +4,7 @@ import { IDecodedJwt, ILoginUser } from '../interfaces/auth.interface';
 
 const API_URL = 'http://localhost:8000/api/auth';
 
-const login = async (user: ILoginUser): Promise<any> => {
+const login = async (user: ILoginUser): Promise<object> => {
   const response = await axios.post(`${API_URL}/signin`, user);
 
   if (response.data) {

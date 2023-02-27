@@ -13,7 +13,7 @@ import {
 } from '../validation/methods/length.method';
 import FormField from '../components/form/FormField';
 import FormButton from '../components/button/FormButton';
-import FormLayout from '../components/form/FormLayout';
+import FormLayout from '../components/layouts/FormLayout';
 
 const NewUser: FC = () => {
   const {
@@ -68,7 +68,7 @@ const NewUser: FC = () => {
       clearForm();
       navigate('/signin');
     }
-  }, [clearForm, dispatch, isSuccess, navigate]);
+  }, [clearForm, dispatch, navigate, isSuccess]);
 
   const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -80,14 +80,6 @@ const NewUser: FC = () => {
       emailHasError ||
       passwordHasError ||
       confirmPasswordHasError
-    )
-      return;
-
-    if (
-      username.length === 0 ||
-      email.length === 0 ||
-      password.length === 0 ||
-      confirmPassword.length === 0
     )
       return;
 

@@ -10,10 +10,7 @@ class ExpenseManager implements IManager {
     return this.expenseDao.create(body);
   }
 
-  listByUser(
-    data: { firstDay: Date | any; lastDay: Date | any },
-    param: string
-  ) {
+  listByUser(data, param: string) {
     return this.expenseDao.listByUser(data, param);
   }
 

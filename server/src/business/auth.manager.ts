@@ -23,7 +23,7 @@ class AuthManager {
     const payload = { id: user.id, username: user.username, email: user.email };
 
     const token = JWTUtils.sign(payload, env.TOKEN, {
-      expiresIn: "1h",
+      expiresIn: "1d",
     });
 
     return { auth_token: token };

@@ -19,7 +19,7 @@ export class IsOwner {
   static isExpenser(_, res: Response, next: NextFunction) {
     try {
       const isMatch: boolean =
-        res.locals?.expense?.recorded_by?.toString() === res.locals.auth?.id;
+        res.locals?.expense?.recorded_by?._id.toString() === res.locals.auth?.id;
       if (!isMatch) throw new AuthorizationErrors();
       next();
     } catch (error) {

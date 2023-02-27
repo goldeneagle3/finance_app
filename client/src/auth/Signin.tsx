@@ -3,7 +3,7 @@ import React, { FormEvent, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FormButton from '../components/button/FormButton';
 import FormField from '../components/form/FormField';
-import FormLayout from '../components/form/FormLayout';
+import FormLayout from '../components/layouts/FormLayout';
 import { ILoginUser } from '../features/interfaces/auth.interface';
 import { reset, signin } from '../features/slices/auth.slice';
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
@@ -38,8 +38,6 @@ const Signin = () => {
   const { user, isLoading, isSuccess, isAuthenticated } = useAppSelector(
     (state) => state.auth,
   );
-
-  // const { user: forUser } = useAppSelector((state) => state.user);
 
   const navigate = useNavigate();
 
